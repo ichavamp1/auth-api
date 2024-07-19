@@ -1,0 +1,168 @@
+{
+  "Products": {
+    "last_id": 30,
+    "data": [
+      {
+        "id": 1,
+        "name": "Apple iPhone 13",
+        "price": 799.99
+      },
+      {
+        "id": 2,
+        "name": "Samsung Galaxy S21",
+        "price": 699.99
+      },
+      {
+        "id": 3,
+        "name": "Sony WH-1000XM4 Headphones",
+        "price": 349.99
+      },
+      {
+        "id": 4,
+        "name": "The Great Gatsby by F. Scott Fitzgerald",
+        "price": 10.99
+      },
+      {
+        "id": 5,
+        "name": "Nike Air Max 270",
+        "price": 150
+      },
+      {
+        "id": 6,
+        "name": "Instant Pot Duo 7-in-1",
+        "price": 89.95
+      },
+      {
+        "id": 7,
+        "name": "Dyson V11 Torque Drive Cordless Vacuum",
+        "price": 599.99
+      },
+      {
+        "id": 8,
+        "name": "Asus ROG Strix Gaming Laptop",
+        "price": 1199.5
+      },
+      {
+        "id": 9,
+        "name": "Sony PlayStation 5",
+        "price": 499.99
+      },
+      {
+        "id": 10,
+        "name": "Samsung 65\" QLED Smart TV",
+        "price": 1200
+      },
+      {
+        "id": 11,
+        "name": "MacBook Pro 14-inch",
+        "price": 1999.99
+      },
+      {
+        "id": 12,
+        "name": "Amazon Echo Dot",
+        "price": 49.99
+      },
+      {
+        "id": 13,
+        "name": "Fitbit Charge 4",
+        "price": 129.95
+      },
+      {
+        "id": 14,
+        "name": "JBL Flip 5 Bluetooth Speaker",
+        "price": 89.95
+      },
+      {
+        "id": 15,
+        "name": "Nintendo Switch",
+        "price": 299.99
+      },
+      {
+        "id": 16,
+        "name": "Logitech MX Master 3 Mouse",
+        "price": 99.99
+      },
+      {
+        "id": 17,
+        "name": "Harry Potter and the Sorcerer's Stone by J.K. Rowling",
+        "price": 9.99
+      },
+      {
+        "id": 18,
+        "name": "KitchenAid Stand Mixer",
+        "price": 379
+      },
+      {
+        "id": 19,
+        "name": "GoPro HERO9 Black",
+        "price": 399.99
+      },
+      {
+        "id": 20,
+        "name": "Roku Streaming Stick+",
+        "price": 49.99
+      },
+      {
+        "id": 21,
+        "name": "Canon EOS Rebel T7 DSLR Camera",
+        "price": 449
+      },
+      {
+        "id": 22,
+        "name": "Dell UltraSharp 27 Monitor",
+        "price": 479.99
+      },
+      {
+        "id": 23,
+        "name": "Echo Show 8",
+        "price": 129.99
+      },
+      {
+        "id": 24,
+        "name": "Apple Watch Series 6",
+        "price": 399.99
+      },
+      {
+        "id": 25,
+        "name": "Bose QuietComfort 35 II Headphones",
+        "price": 299.99
+      },
+      {
+        "id": 26,
+        "name": "Oculus Quest 2",
+        "price": 299
+      },
+      {
+        "id": 27,
+        "name": "Garmin Forerunner 245",
+        "price": 249.99
+      },
+      {
+        "id": 28,
+        "name": "Ring Video Doorbell 3",
+        "price": 199.99
+      },
+      {
+        "id": 29,
+        "name": "Philips Hue White and Color Ambiance Starter Kit",
+        "price": 189.99
+      },
+      {
+        "id": 30,
+        "name": "Kindle Paperwhite",
+        "price": 129.99
+      }
+    ]
+  },
+  "Users": {
+    "last_id": 1,
+    "data": [
+      {
+        "id": 1,
+        "username": "admin",
+        "password": "$2b$10$FmZWsQ9HuegHYzZtFoQWAu",
+        "cart": []
+      }
+    ]
+  }
+}

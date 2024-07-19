@@ -4,5 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const AuthRouter_1 = __importDefault(require("./routes/AuthRouter"));
+const ProductRouter_1 = __importDefault(require("./routes/ProductRouter"));
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use("/api/auth", AuthRouter_1.default);
+app.use("/api/products", ProductRouter_1.default);
 app.listen(3000, () => console.log("Hello world"));
