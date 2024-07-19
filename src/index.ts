@@ -1,4 +1,4 @@
 import express from "express";
 const app = express();
 
-app.listen(3000, () => console.log("lol"));
+app.listen(3000, () => console.log("Hello world"));
