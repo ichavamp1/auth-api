@@ -31,6 +31,7 @@ const ProductRouter = Router();
  * /api/products/all:
  *    get:
  *      summary: Returns a list of all products
+ *      tags: [Products]
  *      responses:
  *        200:
  *          description: The list of the products

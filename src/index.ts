@@ -9,7 +9,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Hello World',
+      title: 'Authenticated CRUD Application',
       version: '1.0.0',
     },
   },
@@ -21,6 +21,11 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(options)));
 app.use("/api/auth", AuthRouter);
 app.use("/api/products", ProductRouter);
 
-app.get("/lol");
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   name: Users
+ */
 
 app.listen(3000, () => console.log("Hello world"));

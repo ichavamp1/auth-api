@@ -155,12 +155,30 @@
         ]
     },
     "Users": {
-        "last_id": 1,
+        "last_id": 4,
         "data": [
             {
                 "id": 1,
                 "username": "admin",
                 "password": "$2b$10$FmZWsQ9HuegHYzZtFoQWAu",
+                "cart": []
+            },
+            {
+                "id": 2,
+                "username": "admin2",
+                "password": "$2b$10$cncQ/XT3pK2y3SYgHEJR6u",
+                "cart": []
+            },
+            {
+                "id": 3,
+                "username": "admin3",
+                "password": "$2b$10$ULSF0QyYa1kVeQoPloS5J.",
+                "cart": []
+            },
+            {
+                "id": 4,
+                "username": "admin4",
+                "password": "$2b$10$EiBdBsEJuz1Z97FF4sjfEeEFEmo4XeU6Buot0q1Y9aAXIacwpAmia",
                 "cart": []
             }
         ]

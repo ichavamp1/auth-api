@@ -13,7 +13,7 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Hello World',
+            title: 'Authenticated CRUD Application',
             version: '1.0.0',
         },
     },
@@ -23,5 +23,10 @@ app.use(express_1.default.json());
 app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup((0, swagger_jsdoc_1.default)(options)));
 app.use("/api/auth", Auth_1.default);
 app.use("/api/products", Product_1.default);
-app.get("/lol");
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   name: Users
+ */
 app.listen(3000, () => console.log("Hello world"));
