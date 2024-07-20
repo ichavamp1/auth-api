@@ -1,11 +1,11 @@
 {
     "Products": {
-        "last_id": 30,
+        "last_id": 33,
         "data": [
             {
                 "id": 1,
-                "name": "Apple iPhone 13",
-                "price": 799.99
+                "name": "string",
+                "price": 0
             },
             {
                 "id": 2,
@@ -19,8 +19,8 @@
             },
             {
                 "id": 4,
-                "name": "The Great Gatsby by F. Scott Fitzgerald",
-                "price": 10.99
+                "name": "string",
+                "price": 0
             },
             {
                 "id": 5,
@@ -151,11 +151,26 @@
                 "id": 30,
                 "name": "Kindle Paperwhite",
                 "price": 129.99
+            },
+            {
+                "id": 31,
+                "name": "admin4",
+                "price": null
+            },
+            {
+                "id": 32,
+                "name": "admin4",
+                "price": null
+            },
+            {
+                "id": 33,
+                "name": "Hello new product",
+                "price": 0
             }
         ]
     },
     "Users": {
-        "last_id": 4,
+        "last_id": 5,
         "data": [
             {
                 "id": 1,
@@ -179,6 +194,12 @@
                 "id": 4,
                 "username": "admin4",
                 "password": "$2b$10$EiBdBsEJuz1Z97FF4sjfEeEFEmo4XeU6Buot0q1Y9aAXIacwpAmia",
+                "cart": []
+            },
+            {
+                "id": 5,
+                "username": "SomberBear",
+                "password": "$2b$10$id.ShqfN5m9Tlpwtly26ieP8T16dzsO3hvgJVa6iRKoJlU1NCSLeG",
                 "cart": []
             }
         ]

@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { Products } from "../database.json";
+import fs from "fs";
+import db from "../database.json";
+import { IProduct } from "../types";
 const ProductRouter = Router();
 
 /**
@@ -28,23 +30,110 @@ const ProductRouter = Router();
 
 /** 
  * @swagger
- * /api/products/all:
- *    get:
- *      summary: Returns a list of all products
+ * /api/products/new:
+ *    post:
+ *      summary: Adds a new object based on the provided input
  *      tags: [Products]
  *      responses:
  *        200:
- *          description: The list of the products
+ *          description: The new product
  *          content:
  *            application/json:
  *              schema:
- *                type: array
- *                items:
- *                  $ref: "#components/schemas/Product"
+ *                $ref: "#components/schemas/Product"
+ *        400:
+ *          description: Invalid request body
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                name:
+ *                  type: string
+ *                price:
+ *                  type: number
+ * /api/products/all:
+  *    get:
+  *      summary: Returns a list of all products
+  *      tags: [Products]
+  *      responses:
+  *        200:
+  *          description: The list of the products
+  *          content:
+  *            application/json:
+  *              schema:
+  *                type: array
+  *                items:
+  *                  $ref: "#components/schemas/Product"
+ * /api/products/edit/{id}:
+ *   post:
+ *    summary: Updates a product based on the params id
+ *    tags: [Products]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: Returns the updated product
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#components/schemas/Product"
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              price:
+ *                type: number
  * */
 
-ProductRouter.get("/all", (req, res) => {
-  return res.status(200).json(Products);
+//CREATE
+ProductRouter.post("/new", (req, res) => {
+  const { name, price } = req.body;
+
+  if (name == null || price == null || isNaN(parseFloat(price))) return res.status(400).json("Invalid request body");
+
+  const newProduct: IProduct = {
+    id: db.Products.last_id + 1,
+    name: name,
+    price: parseFloat(price)
+  }
+  db.Products.last_id++;
+  db.Products.data.push(newProduct);
+  fs.writeFile("./src/database.json", JSON.stringify(db, null, 2), err => {
+    if (err) return res.status(500).json("An error has occurred");
+  });
+  return res.status(200).json(newProduct);
 });
+
+//READ
+ProductRouter.get("/all", (req, res) => {
+  return res.status(200).json(db.Products.data);
+});
+
+//UPDATE
+ProductRouter.post("/edit/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const { name, price } = req.body;
+
+  if (name == null || price == null || isNaN(parseFloat(price))) return res.status(400).json("Invalid request body");
+
+  const target = db.Products.data.find(item => item.id == id);
+  if (target == null) return res.status(404).json("Product was not found");
+
+  target.name = name; target.price = parseFloat(price);
+  fs.writeFile("./src/database.json", JSON.stringify(db, null, 2), err => {
+    if (err) return res.status(500).json("An error has occurred");
+  });
+  return res.status(200).json(target);
+})
 
 export default ProductRouter;

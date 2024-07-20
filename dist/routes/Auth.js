@@ -61,7 +61,7 @@ const AuthRouter = (0, express_1.Router)();
  * @swagger
  * /api/auth/login:
  *   post:
- *     summary: Accepts user credentials and returns an auth token based on the input
+ *     summary: Returns an auth token based on the input
  *     tags: [Users]
  *     responses:
  *       200:
@@ -72,21 +72,12 @@ const AuthRouter = (0, express_1.Router)();
  *               type: array
  *               items:
  *                 $ref: "#components/schemas/User"
- *                 test: hm
+ *       400:
+ *        description: Username or password were not provided
  *       404:
  *         description: User does not exist
- *         content:
- *           application/json:
- *             schema:
- *               type: string
- *               example: User not found
  *       500:
  *         description: Server error
- *         content:
- *           application/json:
- *             schema:
- *               type: string
- *               example: An error has occurred
  *     requestBody:
  *         content:
  *           application/json:
@@ -113,20 +104,12 @@ const AuthRouter = (0, express_1.Router)();
  *                type: array
  *                items:
  *                  $ref: "#components/schemas/UserRegister"
+ *        400:
+ *          description: Username or password were not provided
  *        404:
  *          description: An user with provided username already exists
- *          content:
- *            application/json:
- *              schema:
- *                type: string
- *                example: User already exists
  *        500:
  *          description: Server error
- *          content:
- *            application/json:
- *              schema:
- *                type: string
- *                example: An error has occurred
  *      requestBody:
  *          content:
  *            application/json:
