@@ -1,10 +1,12 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import db from "../database.json";
 import { IUser, UserDTO } from "../types";
 const AuthRouter = Router();
+
+const SECRET = "172764f845600752fdb179b94bc876ff";
 
 /**
  * @swagger
@@ -99,9 +101,7 @@ const AuthRouter = Router();
  *          content:
  *            application/json:
  *              schema:
- *                type: array
- *                items:
- *                  $ref: "#components/schemas/UserRegister"
+ *                $ref: "#components/schemas/UserRegister"
  *        400:
  *          description: Username or password were not provided
  *        404:
@@ -124,6 +124,19 @@ const AuthRouter = Router();
  */
 
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZG1pbjQiLCJjYXJ0IjpbXSwiaWF0IjoxNzIxNDI0MzAwLCJleHAiOjE3MjE0NDU5MDB9.L3QpNs8Bg0aQDWi05nOPTEV0jtsMqXfZXcmaQ6MrOwI"
+
+export function authMiddleware(req: Request, res: Response, next: NextFunction){
+  console.log(req.headers);
+  const authToken = (req.headers["authorization"] == null) ? null : req.headers["authorization"].split(" ")[1];
+
+  if (authToken == null) return res.status(401).json("Unauthorized");
+
+  jwt.verify(authToken, SECRET, (err, payload) => {
+    if (err) return res.status(401).json("Unauthorized");
+
+    next();
+  });
+}
 
 AuthRouter.post("/register", (req, res) => {
   const { username, password } = req.body;
@@ -180,7 +193,7 @@ AuthRouter.post("/login", (req, res) => {
         cart: targetUser.cart
       };
 
-      const authToken = jwt.sign(payload, "172764f845600752fdb179b94bc876ff", {expiresIn: "6h"});
+      const authToken = jwt.sign(payload, SECRET, {expiresIn: "6h"});
       payload.authToken = authToken;
       return res.status(200).json(payload);
     }else{

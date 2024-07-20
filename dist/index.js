@@ -8,6 +8,7 @@ const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const Auth_1 = __importDefault(require("./routes/Auth"));
 const Product_1 = __importDefault(require("./routes/Product"));
+const User_1 = __importDefault(require("./routes/User"));
 const app = (0, express_1.default)();
 const options = {
     definition: {
@@ -21,6 +22,7 @@ const options = {
 };
 app.use(express_1.default.json());
 app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup((0, swagger_jsdoc_1.default)(options)));
+app.use("/api/users", User_1.default);
 app.use("/api/auth", Auth_1.default);
 app.use("/api/products", Product_1.default);
 /**
@@ -28,5 +30,12 @@ app.use("/api/products", Product_1.default);
  * tags:
  *   name: Products
  *   name: Users
+ * components:
+ *  securitySchemes:
+ *    BearerAuth:
+ *      type: http
+ *      scheme: bearer
+ * security:
+ *   - BearerAuth: []
  */
 app.listen(3000, () => console.log("Hello world"));

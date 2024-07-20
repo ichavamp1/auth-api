@@ -3,12 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.authMiddleware = authMiddleware;
 const express_1 = require("express");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const fs_1 = __importDefault(require("fs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const database_json_1 = __importDefault(require("../database.json"));
 const AuthRouter = (0, express_1.Router)();
+const SECRET = "172764f845600752fdb179b94bc876ff";
 /**
  * @swagger
  * components:
@@ -101,9 +103,7 @@ const AuthRouter = (0, express_1.Router)();
  *          content:
  *            application/json:
  *              schema:
- *                type: array
- *                items:
- *                  $ref: "#components/schemas/UserRegister"
+ *                $ref: "#components/schemas/UserRegister"
  *        400:
  *          description: Username or password were not provided
  *        404:
@@ -125,6 +125,17 @@ const AuthRouter = (0, express_1.Router)();
  *                password: parol
  */
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJhZG1pbjQiLCJjYXJ0IjpbXSwiaWF0IjoxNzIxNDI0MzAwLCJleHAiOjE3MjE0NDU5MDB9.L3QpNs8Bg0aQDWi05nOPTEV0jtsMqXfZXcmaQ6MrOwI";
+function authMiddleware(req, res, next) {
+    console.log(req.headers);
+    const authToken = (req.headers["authorization"] == null) ? null : req.headers["authorization"].split(" ")[1];
+    if (authToken == null)
+        return res.status(401).json("Unauthorized");
+    jsonwebtoken_1.default.verify(authToken, SECRET, (err, payload) => {
+        if (err)
+            return res.status(401).json("Unauthorized");
+        next();
+    });
+}
 AuthRouter.post("/register", (req, res) => {
     const { username, password } = req.body;
     if (username == null || password == null)
@@ -172,7 +183,7 @@ AuthRouter.post("/login", (req, res) => {
                 username: targetUser.username,
                 cart: targetUser.cart
             };
-            const authToken = jsonwebtoken_1.default.sign(payload, "172764f845600752fdb179b94bc876ff", { expiresIn: "6h" });
+            const authToken = jsonwebtoken_1.default.sign(payload, SECRET, { expiresIn: "6h" });
             payload.authToken = authToken;
             return res.status(200).json(payload);
         }

@@ -3,11 +3,6 @@
         "last_id": 33,
         "data": [
             {
-                "id": 1,
-                "name": "string",
-                "price": 0
-            },
-            {
                 "id": 2,
                 "name": "Samsung Galaxy S21",
                 "price": 699.99
@@ -16,11 +11,6 @@
                 "id": 3,
                 "name": "Sony WH-1000XM4 Headphones",
                 "price": 349.99
-            },
-            {
-                "id": 4,
-                "name": "string",
-                "price": 0
             },
             {
                 "id": 5,
@@ -151,16 +141,6 @@
                 "id": 30,
                 "name": "Kindle Paperwhite",
                 "price": 129.99
-            },
-            {
-                "id": 31,
-                "name": "admin4",
-                "price": null
-            },
-            {
-                "id": 32,
-                "name": "admin4",
-                "price": null
             },
             {
                 "id": 33,
