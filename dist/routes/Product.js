@@ -84,6 +84,12 @@ const ProductRouter = (0, express_1.Router)();
  *          application/json:
  *            schema:
  *              $ref: "#components/schemas/Product"
+ *      400:
+ *        description: Invalid request body
+ *      404:
+ *        description: Product not found
+ *      500:
+ *        description: Server error
  *    requestBody:
  *      content:
  *        application/json:
@@ -94,6 +100,25 @@ const ProductRouter = (0, express_1.Router)();
  *                type: string
  *              price:
  *                type: number
+ * /api/products/delete/{id}:
+ *   delete:
+ *    summary: Delete a product based on the params id
+ *    tags: [Products]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: Returns the deleted product
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#components/schemas/Product"
+ *      404:
+ *        description: Product not found
  * */
 //CREATE
 ProductRouter.post("/new", (req, res) => {
@@ -128,6 +153,19 @@ ProductRouter.post("/edit/:id", (req, res) => {
         return res.status(404).json("Product was not found");
     target.name = name;
     target.price = parseFloat(price);
+    fs_1.default.writeFile("./src/database.json", JSON.stringify(database_json_1.default, null, 2), err => {
+        if (err)
+            return res.status(500).json("An error has occurred");
+    });
+    return res.status(200).json(target);
+});
+//DELETE
+ProductRouter.delete("/delete/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const target = database_json_1.default.Products.data.find(item => item.id == id);
+    if (target == null)
+        return res.status(404).json("Product was not found");
+    database_json_1.default.Products.data.splice(database_json_1.default.Products.data.map(item => item.id).indexOf(id), 1);
     fs_1.default.writeFile("./src/database.json", JSON.stringify(database_json_1.default, null, 2), err => {
         if (err)
             return res.status(500).json("An error has occurred");

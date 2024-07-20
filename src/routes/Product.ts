@@ -83,6 +83,12 @@ const ProductRouter = Router();
  *          application/json:
  *            schema:
  *              $ref: "#components/schemas/Product"
+ *      400:
+ *        description: Invalid request body
+ *      404:
+ *        description: Product not found
+ *      500:
+ *        description: Server error
  *    requestBody:
  *      content:
  *        application/json:
@@ -93,6 +99,25 @@ const ProductRouter = Router();
  *                type: string
  *              price:
  *                type: number
+ * /api/products/delete/{id}:
+ *   delete:
+ *    summary: Delete a product based on the params id
+ *    tags: [Products]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: Returns the deleted product
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#components/schemas/Product"
+ *      404:
+ *        description: Product not found
  * */
 
 //CREATE
@@ -134,6 +159,20 @@ ProductRouter.post("/edit/:id", (req, res) => {
     if (err) return res.status(500).json("An error has occurred");
   });
   return res.status(200).json(target);
-})
+});
+
+//DELETE
+ProductRouter.delete("/delete/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const target = db.Products.data.find(item => item.id == id);
+  if (target == null) return res.status(404).json("Product was not found");
+
+  db.Products.data.splice(db.Products.data.map(item => item.id).indexOf(id), 1);
+  fs.writeFile("./src/database.json", JSON.stringify(db, null, 2), err => {
+    if (err) return res.status(500).json("An error has occurred");
+  });
+  return res.status(200).json(target);
+});
 
 export default ProductRouter;
